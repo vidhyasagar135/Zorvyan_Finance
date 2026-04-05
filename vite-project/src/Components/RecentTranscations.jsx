@@ -26,7 +26,7 @@ const allTransactions = [
     time: "09:15 AM",
     amount: 4500.0,
     type: "Income",
-  },
+  }, //new commit
   {
     id: 3,
     activity: "Fine Dining Restaurant",
