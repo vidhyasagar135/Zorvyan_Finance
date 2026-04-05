@@ -11,7 +11,7 @@ function App() {
       <Header/>
       {/* <Menu/> */}
       <Dashboard/>
-      <RecentTransactions />
+      {/* <RecentTransactions /> */}
     </>
   )
 }
