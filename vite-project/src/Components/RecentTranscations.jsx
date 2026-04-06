@@ -514,14 +514,13 @@ export default function Dashboard() {
                   <p className="text-[10px] text-gray-400">Overall spending</p>
                 </div>
                 <span className="text-[12px] font-bold text-red-400">-12%</span>
-              </div>
+               </div>
             </div>
           </div>
 
         </div>
 
-        {/* Recent Transactions */}
-        <RecentTransactions />
+     
 
       </main>
     </div>
