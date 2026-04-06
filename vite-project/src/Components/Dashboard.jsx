@@ -6,19 +6,19 @@ import {
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const monthlyData = [
-  { month: "Jan", earning: 12000, spending: 8000 },
-  { month: "Feb", earning: 18000, spending: 10000 },
-  { month: "Mar", earning: 15000, spending: 12000 },
-  { month: "Apr", earning: 22000, spending: 14000 },
-  { month: "May", earning: 28000, spending: 16000 },
-  { month: "Jun", earning: 24000, spending: 18000 },
-  { month: "Jul", earning: 30000, spending: 20000 },
-  { month: "Aug", earning: 35000, spending: 22000 },
-  { month: "Sep", earning: 32000, spending: 24000 },
-  { month: "Oct", earning: 38000, spending: 26000 },
-  { month: "Nov", earning: 42000, spending: 28000 },
-  { month: "Dec", earning: 45567, spending: 32000 },
+const allMonthlyData = [
+  { month: "Jan", date: "2026-01-15", earning: 12000, spending: 8000 },
+  { month: "Feb", date: "2026-02-15", earning: 18000, spending: 10000 },
+  { month: "Mar", date: "2026-03-15", earning: 15000, spending: 12000 },
+  { month: "Apr", date: "2026-04-15", earning: 22000, spending: 14000 },
+  { month: "May", date: "2026-05-15", earning: 28000, spending: 16000 },
+  { month: "Jun", date: "2026-06-15", earning: 24000, spending: 18000 },
+  { month: "Jul", date: "2026-07-15", earning: 30000, spending: 20000 },
+  { month: "Aug", date: "2026-08-15", earning: 35000, spending: 22000 },
+  { month: "Sep", date: "2026-09-15", earning: 32000, spending: 24000 },
+  { month: "Oct", date: "2026-10-15", earning: 38000, spending: 26000 },
+  { month: "Nov", date: "2026-11-15", earning: 42000, spending: 28000 },
+  { month: "Dec", date: "2026-12-15", earning: 45567, spending: 32000 },
 ];
 
 const spendingCategories = [
@@ -26,6 +26,13 @@ const spendingCategories = [
   { label: "Transport",     value: 840,  color: "#6366f1", pct: 24.2 },
   { label: "Shopping",      value: 720,  color: "#a78bfa", pct: 20.7 },
   { label: "Utilities",     value: 675,  color: "#d1d5db", pct: 19.4 },
+];
+
+const TIME_FILTERS = [
+  { key: "today",   label: "Today" },
+  { key: "weekly",  label: "Weekly" },
+  { key: "monthly", label: "This Month" },
+  { key: "yearly",  label: "Yearly" },
 ];
 
 const FILTER_TABS = [
@@ -40,31 +47,79 @@ const FILTER_TABS = [
 ];
 
 const allTransactions = [
-  { id: 1,  activity: "Flight Ticket Booking",  category: "Travel",        filterType: "merchant",  icon: "✈️", iconBg: "bg-blue-50",    orderId: "INV_000075", date: "15 Apr, 2026", time: "11:30 AM", amount: -32750.00, type: "Expense" },
-  { id: 2,  activity: "Freelance Project",       category: "Income",        filterType: "received",  icon: "💼", iconBg: "bg-green-50",   orderId: "INV_000076", date: "14 Apr, 2026", time: "09:15 AM", amount:   4500.00, type: "Income"  },
-  { id: 3,  activity: "Fine Dining Restaurant",  category: "Food",          filterType: "merchant",  icon: "🍔", iconBg: "bg-orange-50",  orderId: "RCP_000821", date: "12 Apr, 2026", time: "08:45 PM", amount:   -245.50, type: "Expense" },
-  { id: 4,  activity: "Electric Bill",           category: "Utilities",     filterType: "recharge",  icon: "⚡", iconBg: "bg-yellow-50",  orderId: "INV_000077", date: "10 Apr, 2026", time: "10:00 AM", amount:   -185.00, type: "Expense" },
-  { id: 5,  activity: "Spotify Subscription",   category: "Entertainment", filterType: "merchant",  icon: "🎵", iconBg: "bg-green-50",   orderId: "SUB_000342", date: "08 Apr, 2026", time: "12:00 PM", amount:     -9.99, type: "Expense" },
-  { id: 6,  activity: "Salary Credit",           category: "Income",        filterType: "received",  icon: "💰", iconBg: "bg-emerald-50", orderId: "SAL_000101", date: "05 Apr, 2026", time: "08:00 AM", amount:   8500.00, type: "Income"  },
-  { id: 7,  activity: "Amazon Shopping",         category: "Shopping",      filterType: "merchant",  icon: "🛒", iconBg: "bg-orange-50",  orderId: "AMZ_009821", date: "03 Apr, 2026", time: "03:20 PM", amount:   -340.00, type: "Expense" },
-  { id: 8,  activity: "Gym Membership",          category: "Health",        filterType: "merchant",  icon: "🏋️", iconBg: "bg-purple-50",  orderId: "GYM_000055", date: "01 Apr, 2026", time: "07:00 AM", amount:    -49.00, type: "Expense" },
-  { id: 9,  activity: "Gold Investment",         category: "Investment",    filterType: "gold",      icon: "🥇", iconBg: "bg-yellow-50",  orderId: "GLD_000011", date: "28 Mar, 2026", time: "10:00 AM", amount:  -5000.00, type: "Expense" },
-  { id: 10, activity: "Cashback Reward",         category: "Rewards",       filterType: "cashback",  icon: "🎁", iconBg: "bg-pink-50",    orderId: "CBK_000099", date: "25 Mar, 2026", time: "02:00 PM", amount:    120.00, type: "Income"  },
-  { id: 11, activity: "Health Insurance",        category: "Insurance",     filterType: "insurance", icon: "🏥", iconBg: "bg-red-50",     orderId: "INS_000031", date: "20 Mar, 2026", time: "09:30 AM", amount:   -850.00, type: "Expense" },
-  { id: 12, activity: "Mobile Recharge",         category: "Recharge",      filterType: "recharge",  icon: "📱", iconBg: "bg-indigo-50",  orderId: "RCH_000204", date: "18 Mar, 2026", time: "07:45 PM", amount:   -299.00, type: "Expense" },
-  { id: 13, activity: "Money Transfer to Amit",  category: "Transfer",      filterType: "sent",      icon: "↗️", iconBg: "bg-blue-50",    orderId: "TRF_000411", date: "15 Mar, 2026", time: "11:00 AM", amount:  -2000.00, type: "Expense" },
-  { id: 14, activity: "Car Insurance Premium",   category: "Insurance",     filterType: "insurance", icon: "🚗", iconBg: "bg-gray-50",    orderId: "INS_000032", date: "10 Mar, 2026", time: "03:00 PM", amount:  -1200.00, type: "Expense" },
-  { id: 15, activity: "Gold Redemption",         category: "Investment",    filterType: "gold",      icon: "🪙", iconBg: "bg-yellow-50",  orderId: "GLD_000012", date: "05 Mar, 2026", time: "01:00 PM", amount:   3200.00, type: "Income"  },
-  { id: 16, activity: "Received from Rahul",     category: "Transfer",      filterType: "received",  icon: "👤", iconBg: "bg-teal-50",    orderId: "TRF_000412", date: "01 Mar, 2026", time: "06:30 PM", amount:   1500.00, type: "Income"  },
-  { id: 17, activity: "Internet Bill",           category: "Utilities",     filterType: "recharge",  icon: "🌐", iconBg: "bg-cyan-50",    orderId: "RCH_000205", date: "25 Feb, 2026", time: "10:15 AM", amount:   -699.00, type: "Expense" },
-  { id: 18, activity: "Credit Card Cashback",    category: "Rewards",       filterType: "cashback",  icon: "💳", iconBg: "bg-violet-50",  orderId: "CBK_000100", date: "20 Feb, 2026", time: "05:00 PM", amount:    250.00, type: "Income"  },
-  { id: 19, activity: "Sent to Priya",           category: "Transfer",      filterType: "sent",      icon: "↗️", iconBg: "bg-rose-50",    orderId: "TRF_000413", date: "15 Feb, 2026", time: "12:45 PM", amount:   -500.00, type: "Expense" },
-  { id: 20, activity: "Grocery Shopping",        category: "Food",          filterType: "merchant",  icon: "🛍️", iconBg: "bg-lime-50",    orderId: "MRT_000501", date: "10 Feb, 2026", time: "09:00 AM", amount:   -640.00, type: "Expense" },
+  { id: 1,  activity: "Flight Ticket Booking",  category: "Travel",        filterType: "merchant",  icon: "✈️", iconBg: "bg-blue-50",    orderId: "INV_000075", date: "15 Apr, 2026", time: "11:30 AM", amount: -32750.00, type: "Expense", rawDate: "2026-04-15" },
+  { id: 2,  activity: "Freelance Project",       category: "Income",        filterType: "received",  icon: "💼", iconBg: "bg-green-50",   orderId: "INV_000076", date: "14 Apr, 2026", time: "09:15 AM", amount:   4500.00, type: "Income",  rawDate: "2026-04-14" },
+  { id: 3,  activity: "Fine Dining Restaurant",  category: "Food",          filterType: "merchant",  icon: "🍔", iconBg: "bg-orange-50",  orderId: "RCP_000821", date: "12 Apr, 2026", time: "08:45 PM", amount:   -245.50, type: "Expense", rawDate: "2026-04-12" },
+  { id: 4,  activity: "Electric Bill",           category: "Utilities",     filterType: "recharge",  icon: "⚡", iconBg: "bg-yellow-50",  orderId: "INV_000077", date: "10 Apr, 2026", time: "10:00 AM", amount:   -185.00, type: "Expense", rawDate: "2026-04-10" },
+  { id: 5,  activity: "Spotify Subscription",   category: "Entertainment", filterType: "merchant",  icon: "🎵", iconBg: "bg-green-50",   orderId: "SUB_000342", date: "08 Apr, 2026", time: "12:00 PM", amount:     -9.99, type: "Expense", rawDate: "2026-04-08" },
+  { id: 6,  activity: "Salary Credit",           category: "Income",        filterType: "received",  icon: "💰", iconBg: "bg-emerald-50", orderId: "SAL_000101", date: "05 Apr, 2026", time: "08:00 AM", amount:   8500.00, type: "Income",  rawDate: "2026-04-05" },
+  { id: 7,  activity: "Amazon Shopping",         category: "Shopping",      filterType: "merchant",  icon: "🛒", iconBg: "bg-orange-50",  orderId: "AMZ_009821", date: "03 Apr, 2026", time: "03:20 PM", amount:   -340.00, type: "Expense", rawDate: "2026-04-03" },
+  { id: 8,  activity: "Gym Membership",          category: "Health",        filterType: "merchant",  icon: "🏋️", iconBg: "bg-purple-50",  orderId: "GYM_000055", date: "01 Apr, 2026", time: "07:00 AM", amount:    -49.00, type: "Expense", rawDate: "2026-04-01" },
+  { id: 9,  activity: "Gold Investment",         category: "Investment",    filterType: "gold",      icon: "🥇", iconBg: "bg-yellow-50",  orderId: "GLD_000011", date: "28 Mar, 2026", time: "10:00 AM", amount:  -5000.00, type: "Expense", rawDate: "2026-03-28" },
+  { id: 10, activity: "Cashback Reward",         category: "Rewards",       filterType: "cashback",  icon: "🎁", iconBg: "bg-pink-50",    orderId: "CBK_000099", date: "25 Mar, 2026", time: "02:00 PM", amount:    120.00, type: "Income",  rawDate: "2026-03-25" },
+  { id: 11, activity: "Health Insurance",        category: "Insurance",     filterType: "insurance", icon: "🏥", iconBg: "bg-red-50",     orderId: "INS_000031", date: "20 Mar, 2026", time: "09:30 AM", amount:   -850.00, type: "Expense", rawDate: "2026-03-20" },
+  { id: 12, activity: "Mobile Recharge",         category: "Recharge",      filterType: "recharge",  icon: "📱", iconBg: "bg-indigo-50",  orderId: "RCH_000204", date: "18 Mar, 2026", time: "07:45 PM", amount:   -299.00, type: "Expense", rawDate: "2026-03-18" },
+  { id: 13, activity: "Money Transfer to Amit",  category: "Transfer",      filterType: "sent",      icon: "↗️", iconBg: "bg-blue-50",    orderId: "TRF_000411", date: "15 Mar, 2026", time: "11:00 AM", amount:  -2000.00, type: "Expense", rawDate: "2026-03-15" },
+  { id: 14, activity: "Car Insurance Premium",   category: "Insurance",     filterType: "insurance", icon: "🚗", iconBg: "bg-gray-50",    orderId: "INS_000032", date: "10 Mar, 2026", time: "03:00 PM", amount:  -1200.00, type: "Expense", rawDate: "2026-03-10" },
+  { id: 15, activity: "Gold Redemption",         category: "Investment",    filterType: "gold",      icon: "🪙", iconBg: "bg-yellow-50",  orderId: "GLD_000012", date: "05 Mar, 2026", time: "01:00 PM", amount:   3200.00, type: "Income",  rawDate: "2026-03-05" },
+  { id: 16, activity: "Received from Rahul",     category: "Transfer",      filterType: "received",  icon: "👤", iconBg: "bg-teal-50",    orderId: "TRF_000412", date: "01 Mar, 2026", time: "06:30 PM", amount:   1500.00, type: "Income",  rawDate: "2026-03-01" },
+  { id: 17, activity: "Internet Bill",           category: "Utilities",     filterType: "recharge",  icon: "🌐", iconBg: "bg-cyan-50",    orderId: "RCH_000205", date: "25 Feb, 2026", time: "10:15 AM", amount:   -699.00, type: "Expense", rawDate: "2026-02-25" },
+  { id: 18, activity: "Credit Card Cashback",    category: "Rewards",       filterType: "cashback",  icon: "💳", iconBg: "bg-violet-50",  orderId: "CBK_000100", date: "20 Feb, 2026", time: "05:00 PM", amount:    250.00, type: "Income",  rawDate: "2026-02-20" },
+  { id: 19, activity: "Sent to Priya",           category: "Transfer",      filterType: "sent",      icon: "↗️", iconBg: "bg-rose-50",    orderId: "TRF_000413", date: "15 Feb, 2026", time: "12:45 PM", amount:   -500.00, type: "Expense", rawDate: "2026-02-15" },
+  { id: 20, activity: "Grocery Shopping",        category: "Food",          filterType: "merchant",  icon: "🛍️", iconBg: "bg-lime-50",    orderId: "MRT_000501", date: "10 Feb, 2026", time: "09:00 AM", amount:   -640.00, type: "Expense", rawDate: "2026-02-10" },
 ];
 
 const PAGE_SIZE = 6;
 const fmt  = (n) => new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.abs(n));
 const fmtK = (n) => n >= 1000 ? `$${(n / 1000).toFixed(0)}k` : `$${n}`;
+
+// ─── Time Filter Helpers ───────────────────────────────────────────────────────
+
+function getChartData(timeFilter) {
+  switch (timeFilter) {
+    case "today":
+      return [
+        { month: "Mon", earning: 1200, spending: 300 },
+        { month: "Tue", earning: 800,  spending: 450 },
+        { month: "Wed", earning: 1500, spending: 600 },
+        { month: "Thu", earning: 900,  spending: 200 },
+        { month: "Fri", earning: 2100, spending: 800 },
+        { month: "Sat", earning: 600,  spending: 1200 },
+        { month: "Sun", earning: 400,  spending: 500 },
+      ];
+    case "weekly":
+      return allMonthlyData.slice(-4).map((d, i) => ({ ...d, month: `Wk${i + 1}` }));
+    case "monthly":
+      return [
+        { month: "Wk1", earning: 8500,  spending: 4200 },
+        { month: "Wk2", earning: 12000, spending: 7800 },
+        { month: "Wk3", earning: 15000, spending: 9500 },
+        { month: "Wk4", earning: 10067, spending: 10500 },
+      ];
+    case "yearly":
+    default:
+      return allMonthlyData;
+  }
+}
+
+function filterTxByTime(timeFilter) {
+  const cutoffs = {
+    today:   "2026-04-05",
+    weekly:  "2026-03-30",
+    monthly: "2026-04-01",
+    yearly:  "2026-01-01",
+  };
+  const cutoff = cutoffs[timeFilter] || "2026-01-01";
+  return allTransactions.filter((t) => t.rawDate >= cutoff);
+}
+
+function getStats(timeFilter) {
+  const txs = filterTxByTime(timeFilter);
+  const income  = txs.filter((t) => t.amount > 0).reduce((s, t) => s + t.amount, 0);
+  const expense = txs.filter((t) => t.amount < 0).reduce((s, t) => s + Math.abs(t.amount), 0);
+  const balance = income - expense;
+  return { income, expense, balance };
+}
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
@@ -81,7 +136,7 @@ const MenuIcon     = () => <svg width="16" height="16" viewBox="0 0 24 24" fill=
 const ChevronLeft  = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="15 18 9 12 15 6"/></svg>;
 const ChevronRight = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6"/></svg>;
 
-const menuItems   = [
+const menuItems  = [
   { name: "Dashboard", icon: <IconGrid /> },
   { name: "Analytics", icon: <IconBar /> },
   { name: "Insights",  icon: <IconInfo /> },
@@ -220,27 +275,30 @@ function getTabBadgeStyle(filterType) {
 
 // ─── Recent Transactions ──────────────────────────────────────────────────────
 
-function RecentTransactions() {
+function RecentTransactions({ timeFilter }) {
   const [search,       setSearch]       = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [page,         setPage]         = useState(1);
   const [selected,     setSelected]     = useState([]);
   const [allChecked,   setAllChecked]   = useState(false);
 
-  // Per-tab counts (always based on full data, ignoring search)
+  // Filter transactions by time period first
+  const timeTxs = useMemo(() => filterTxByTime(timeFilter), [timeFilter]);
+
+  // Per-tab counts (based on time-filtered data)
   const counts = useMemo(() => {
-    const c = { all: allTransactions.length };
+    const c = { all: timeTxs.length };
     FILTER_TABS.slice(1).forEach((tab) => {
-      c[tab.key] = allTransactions.filter((t) => t.filterType === tab.key).length;
+      c[tab.key] = timeTxs.filter((t) => t.filterType === tab.key).length;
     });
     return c;
-  }, []);
+  }, [timeTxs]);
 
   // Filter by tab, then by search query
   const filtered = useMemo(() => {
     let list = activeFilter === "all"
-      ? allTransactions
-      : allTransactions.filter((t) => t.filterType === activeFilter);
+      ? timeTxs
+      : timeTxs.filter((t) => t.filterType === activeFilter);
     const q = search.trim().toLowerCase();
     if (q) {
       list = list.filter(
@@ -252,7 +310,7 @@ function RecentTransactions() {
       );
     }
     return list;
-  }, [activeFilter, search]);
+  }, [activeFilter, search, timeTxs]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const saferPage  = Math.min(page, totalPages);
@@ -364,7 +422,7 @@ function RecentTransactions() {
                   <p className="text-[12px] text-gray-400 max-w-xs text-center">
                     {search
                       ? `No results for "${search}" in ${activeTabLabel}`
-                      : `No ${activeTabLabel} transactions yet`}
+                      : `No ${activeTabLabel} transactions in this period`}
                   </p>
                   {(search || activeFilter !== "all") && (
                     <button
@@ -458,9 +516,13 @@ function RecentTransactions() {
 // ─── Root ─────────────────────────────────────────────────────────────────────
 
 export default function Dashboard() {
-  const [active,    setActive]    = useState("Dashboard");
-  const [chartMode, setChartMode] = useState("Yearly");
-  const chartData = chartMode === "Yearly" ? monthlyData : monthlyData.slice(-6);
+  const [active,      setActive]      = useState("Dashboard");
+  const [timeFilter,  setTimeFilter]  = useState("monthly");
+  const [dropOpen,    setDropOpen]    = useState(false);
+
+  const chartData   = useMemo(() => getChartData(timeFilter),  [timeFilter]);
+  const stats       = useMemo(() => getStats(timeFilter),      [timeFilter]);
+  const activeLabel = TIME_FILTERS.find((t) => t.key === timeFilter)?.label ?? "This Month";
 
   return (
     <div className="flex h-screen overflow-hidden bg-[#f4f6fb]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
@@ -470,15 +532,43 @@ export default function Dashboard() {
 
       <main className="flex-1 overflow-y-auto p-6">
 
+        {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Good Morning, Alex</h1>
             <p className="text-sm text-gray-400 mt-0.5">Here's an overview of your financial health and recent activity.</p>
           </div>
-          <div className="flex items-center gap-2 mt-1">
-            <button className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:border-gray-300 shadow-sm transition-all">
-              This Month <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
+          <div className="flex items-center gap-2 mt-1 relative">
+
+            {/* ── Time Filter Dropdown (NOW FUNCTIONAL) ── */}
+            <div className="relative">
+              <button
+                onClick={() => setDropOpen((o) => !o)}
+                className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:border-gray-300 shadow-sm transition-all"
+              >
+                {activeLabel}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+
+              {dropOpen && (
+                <div className="absolute top-[calc(100%+6px)] right-0 bg-white border border-gray-200 rounded-xl shadow-lg z-50 min-w-[160px] overflow-hidden">
+                  {TIME_FILTERS.map((tf) => (
+                    <button
+                      key={tf.key}
+                      onClick={() => { setTimeFilter(tf.key); setDropOpen(false); }}
+                      className={`block w-full text-left px-4 py-2.5 text-[13px] transition-colors ${
+                        timeFilter === tf.key
+                          ? "bg-indigo-50 text-indigo-600 font-semibold"
+                          : "text-gray-600 hover:bg-gray-50"
+                      }`}
+                    >
+                      {tf.label}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
             <button className="flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium text-gray-600 bg-white border border-gray-200 rounded-xl hover:border-gray-300 shadow-sm transition-all">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               Export
@@ -486,31 +576,65 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Stat Cards — reactive to time filter */}
         <div className="grid grid-cols-3 gap-4 mb-5">
-          <StatCard iconBg="bg-violet-500" iconEl={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>} amount={45567} label="Total Balance"/>
-          <StatCard iconBg="bg-orange-400" iconEl={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>} amount={8240} label="Monthly Income" trend="12.5%" trendUp={true}/>
-          <StatCard iconBg="bg-pink-500"   iconEl={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>} amount={3475} label="Monthly Expenses" trend="4.2%" trendUp={false}/>
+          <StatCard
+            iconBg="bg-violet-500"
+            iconEl={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>}
+            amount={Math.abs(stats.balance)}
+            label="Net Balance"
+          />
+          <StatCard
+            iconBg="bg-orange-400"
+            iconEl={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>}
+            amount={stats.income}
+            label={`${activeLabel} Income`}
+            trend="12.5%"
+            trendUp={true}
+          />
+          <StatCard
+            iconBg="bg-pink-500"
+            iconEl={<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>}
+            amount={stats.expense}
+            label={`${activeLabel} Expenses`}
+            trend="4.2%"
+            trendUp={false}
+          />
         </div>
 
+        {/* Chart + Donut */}
         <div className="grid grid-cols-5 gap-4">
           <div className="col-span-3 bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
             <div className="flex items-start justify-between mb-1">
               <div>
                 <p className="text-[13px] font-semibold text-gray-500">Transactions Overview</p>
-                <p className="text-[22px] font-bold text-gray-900 tracking-tight leading-snug">$45,567 <span className="text-sm font-semibold text-emerald-500">↑ 4.9%</span></p>
+                <p className="text-[22px] font-bold text-gray-900 tracking-tight leading-snug">
+                  ${fmt(stats.income).split(".")[0]} <span className="text-sm font-semibold text-emerald-500">↑ 4.9%</span>
+                </p>
               </div>
+
+              {/* Chart time-mode toggle — synced with global timeFilter */}
               <div className="flex items-center bg-gray-100 rounded-lg p-0.5 gap-0.5">
-                {["Monthly","Yearly"].map(m=>(
-                  <button key={m} onClick={()=>setChartMode(m)}
-                    className={`px-3 py-1.5 text-[12px] font-semibold rounded-md transition-all ${chartMode===m?"bg-indigo-600 text-white shadow-sm":"text-gray-500 hover:text-gray-700"}`}>{m}</button>
+                {TIME_FILTERS.map((tf) => (
+                  <button key={tf.key} onClick={() => setTimeFilter(tf.key)}
+                    className={`px-3 py-1.5 text-[12px] font-semibold rounded-md transition-all ${
+                      timeFilter === tf.key ? "bg-indigo-600 text-white shadow-sm" : "text-gray-500 hover:text-gray-700"
+                    }`}>
+                    {tf.label}
+                  </button>
                 ))}
               </div>
             </div>
+
             <div className="flex items-center gap-4 mb-3 justify-end">
               {[["#6366f1","Earning"],["#34d399","Spending"]].map(([c,l])=>(
-                <div key={l} className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full" style={{background:c}}/><span className="text-[11px] text-gray-400 font-medium">{l}</span></div>
+                <div key={l} className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full" style={{background:c}}/>
+                  <span className="text-[11px] text-gray-400 font-medium">{l}</span>
+                </div>
               ))}
             </div>
+
             <ResponsiveContainer width="100%" height={200}>
               <AreaChart data={chartData} margin={{top:0,right:0,left:-10,bottom:0}}>
                 <defs>
@@ -557,7 +681,9 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <RecentTransactions />
+        {/* Transactions Table */}
+        <RecentTransactions timeFilter={timeFilter} />
+
       </main>
     </div>
   );
